@@ -1,4 +1,4 @@
-class Airport
+class Airport	
 
 	attr_reader :name, :flights
 
