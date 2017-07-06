@@ -12,6 +12,6 @@ class Passenger
 	end
 
 	def to_s
-		"name: #{@first_name}, age: #{@age}, passport number: #{@passport_number}"
+		"\r\nname: #{@first_name}, age: #{@age}, passport number: #{@passport_number}"
 	end	
 end

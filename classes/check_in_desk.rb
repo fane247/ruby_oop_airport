@@ -16,31 +16,31 @@ class Check_in_desk
 
 	def add_flight_to_airport
 
-		puts "please enter the capacity number \n "
+		puts "\r\nplease enter the capacity number"
 		capacity = gets.chomp.to_i
 
-		puts "please enter the destination \n "
+		puts "\r\nplease enter the destination"
 		destination = gets.chomp
 
-		puts "please enter the flight code number \n "
+		puts "\r\nplease enter the flight code number"
 		flight_code = gets.chomp
 
-		puts "please enter the duration number \n "
+		puts "\r\nplease enter the duration number"
 		duration = gets.chomp.to_i
 
 		@airport.add_flight(capacity, destination, flight_code, duration)
 
-		puts "Flight #{destination}: #{flight_code} has been added \n "
+		puts "\r\nFlight #{destination}: #{flight_code} has been added"
 
 	end
 
 	def select_flight
 
-		puts "please select a flight \n "
+		puts "\r\n please select a flight"
 
 		@airport.flights.each_index do |n|
 
-		 	puts "#{n}. #{@airport.flights[n].desitnation}: #{@airport.flights[n].flight_code} \n "
+		 	puts "\r\n #{n}. #{@airport.flights[n].desitnation}: #{@airport.flights[n].flight_code}"
 	 	end
 
 	 	flight_index = gets.chomp.to_i
@@ -55,21 +55,21 @@ class Check_in_desk
 
 	def add_passenger_to_flight(flight)
 
-		puts "Please enter the first name of the passenger \r\n"
+		puts "\r\n Please enter the first name of the passenger"
 		passenger_first_name = gets.chomp
 
-		puts "Please enter the last name of the passenger \r\n"
+		puts "\r\n Please enter the last name of the passenger"
 		passenger_first_name = gets.chomp
 
-		puts "Please enter the age of the passenger \r\n"
+		puts "\r\n Please enter the age of the passenger"
 		passenger_age = gets.chomp
 
-		puts "Please enter the passport number of the passenger \r\n"
+		puts "\r\n Please enter the passport number of the passenger"
 		passenger_passport_number = gets.chomp
 
 		flight.add_passenger(passenger_name, passenger_age, passenger_passport_number)
 
-		puts "#{passenger_first_name} #{passenger_last_name} has been booked onto flight #{flight.desitnation}: #{flight.flight_code} \r\n"
+		puts "\r\n #{passenger_first_name} #{passenger_last_name} has been booked onto flight #{flight.desitnation}: #{flight.flight_code}"
 
 	end
 
@@ -77,7 +77,7 @@ class Check_in_desk
 
 		flight.passengers.each do |passenger|
 
-			puts "#{passenger.first_name} \n"
+			puts "\r\n #{passenger.first_name} "
 
 		end
 
@@ -106,13 +106,13 @@ class Check_in_desk
 
 	def change_details(object)
 
-		puts "what detail would you like to change? \r\n"
+		puts "\r\n what detail would you like to change? "
 
 		object.instance_variables.each_with_index do |instance_variable, index|
 
 			clean_name = get_clean_instance_variable_name(instance_variable)
 
-			puts "#{index}. #{clean_name} \r\n"
+			puts "\r\n#{index}. #{clean_name}"
 
 		end
 
@@ -120,14 +120,14 @@ class Check_in_desk
 
 		instance_variable_name = object.instance_variables[index_response]
 
-		puts "what would you like to change it to \r\n?"
+		puts "\r\n what would you like to change it to?"
 
 		changed_detail = gets.chomp
 
 		object.instance_variable_set(instance_variable_name, changed_detail)
 
 		puts object
-		puts "has been edited! \r\n"
+		puts "\r\nhas been edited!"
 
 	end
 
@@ -139,7 +139,7 @@ class Check_in_desk
 
 	def delete_flight(flight)
 
-		if !flight = nil
+		if !flight == nil
 
 			@airport.flights.delete_if { |flights|  @airport.flights.flight_code = flight.flight_code}
 
@@ -160,8 +160,8 @@ class Check_in_desk
 		while (!exit)
 
 			puts "Welcome to the Democratic Republic of Fane Airport"
-			puts "Main Menu \n"
-			puts "Please select one of the following options\n"
+			puts "\r\nMain Menu "
+			puts "\r\nPlease select one of the following options "
 
 			puts "1. Add flight"
 			puts "2. List all Flights"
@@ -172,7 +172,7 @@ class Check_in_desk
 
 			case answer
 			when 1 then add_flight_to_airport
-			when 2 then put @airport.flights
+			when 2 then puts @airport.flights
 			when 3 then flights_menu
 			when 4 then exit = true
 			else puts "that is not a valid option"
@@ -188,17 +188,18 @@ class Check_in_desk
 
 		while (!back)
 
-			puts "flights menu \n"
+			puts "\r\nflights menu"
 
-			puts "Please select one of the following options\n"
+			puts "\r\nPlease select one of the following options"
 
 			puts "1. add a passenger to a flight"
 			puts "2. list all passengers on a flight"
 			puts "3. change details of a flight"
 			puts "4. delete a flight"
-			puts "5. back"
+			puts "5. change details of a passenger"
+			puts "6. back"
 
-			answer = gets.chomp
+			answer = gets.chomp.to_i
 
 			flight = select_flight
 
@@ -207,7 +208,8 @@ class Check_in_desk
 			when 2 then puts flight.passengers
 			when 3 then change_details(flight)
 			when 4 then delete_flight(flight)
-			when 5 then back = true
+			when 5 then change_details(get_passenger_from_flight)
+			when 6 then back = true
 			else puts "that is not a valid option"
 			end
 
@@ -221,7 +223,7 @@ end
 
 democratic_republic_of_fane_airport = Airport.new("the Democratic Republic of Fane Airport")
 
-# check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
+check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
 
 # check_in_desk.add_flight_to_airport
 
@@ -244,5 +246,7 @@ democratic_republic_of_fane_airport = Airport.new("the Democratic Republic of Fa
 # puts check_in_desk.airport.flights
 
 # check_in_desk.select_flight
+
+check_in_desk.main_menu
 
 

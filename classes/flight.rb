@@ -15,7 +15,7 @@ class Flight
 
 	def to_s 
 
-		"Flight #{flight_code} to #{desitnation} with a capacity of #{capacity} and takes #{duration} hours"
+		"\r\nFlight #{flight_code} to #{desitnation} with a capacity of #{capacity} and takes #{duration} hours\r\n"
 
 	end
 
