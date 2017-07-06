@@ -42,7 +42,7 @@ class Check_in_desk
 		 	puts "#{n}. #{@airport.flights[n].desitnation}: #{@airport.flights[n].flight_code} \n "
 	 	end
 
-	 	flight_index = gets.chomp
+	 	flight_index = gets.chomp.to_i
 
 	 	@airport.flights[flight_index]
 
@@ -56,8 +56,11 @@ class Check_in_desk
 
 		flight = select_flight
 
-		puts "Please enter the name of the passenger \r\n"
-		passenger_name = gets.chomp
+		puts "Please enter the first name of the passenger \r\n"
+		passenger_first_name = gets.chomp
+
+		puts "Please enter the last name of the passenger \r\n"
+		passenger_first_name = gets.chomp
 
 		puts "Please enter the age of the passenger \r\n"
 		passenger_age = gets.chomp
@@ -67,9 +70,103 @@ class Check_in_desk
 
 		flight.add_passenger(passenger_name, passenger_age, passenger_passport_number)
 
-		puts "#{passenger_name} has been booked onto flight #{flight.desitnation}: #{flight.flight_code} \r\n"
+		puts "#{passenger_first_name} #{passenger_last_name} has been booked onto flight #{flight.desitnation}: #{flight.flight_code} \r\n"
 
 	end
+
+	def list_all_passengers_on_flight(flight)
+
+		flight.passengers.each do |passenger|
+
+			puts "#{passenger.first_name} \n"
+
+		end
+
+	end
+
+	def get_passenger_from_flight(flight)
+
+		puts "please enter first name"
+		first_name = gets.chomp
+
+		puts "please enter last name"
+		last_name = gets.chomp
+
+		passenger = flight.passengers.find do |passenger|
+
+			passenger.first_name == first_name
+			passenger.last_name == last_name
+
+		end
+
+		puts passenger
+
+	end
+
+	#can change both flight and passenger
+
+	def change_details(object)
+
+		puts "what detail would you like to change? \r\n"
+
+		object.instance_variables.each_with_index do |instance_variable, index|
+
+			clean_name = get_clean_instance_variable_name(instance_variable)
+
+			puts "#{index}. #{clean_name} \r\n"
+
+		end
+
+		index_response = gets.chomp.to_i
+
+		instance_variable_name = object.instance_variables[index_response]
+
+		puts "what would you like to change it to \r\n?"
+
+		changed_detail = gets.chomp
+
+		object.instance_variable_set(instance_variable_name, changed_detail)
+
+		puts object
+		puts "has been edited! \r\n"
+
+	end
+
+	def get_clean_instance_variable_name(instance_variable)
+
+		instance_variable.to_s.tr('@', '').tr('_', ' ')
+
+	end
+
+	def delete_flight()
+
+		puts "Please enter the flight number that you'd like to delete"
+
+		flight  = select_flight
+
+		if !flight = nil
+
+			@airport.flights.delete_if { |flights|  @airport.flights.flight_code = flight.flight_code}
+
+			puts "#{flight_number} has been delted!"
+
+		else
+
+			puts "invalid flight chosen"
+
+		end
+
+	end
+
+	def main_menu
+
+		exit = true
+
+		while (!exit)
+
+			puts "Welcome to the Democratic Republic of Fane Airport"
+			puts "Please select one of the following options\n"
+
 
 
 
@@ -77,12 +174,30 @@ class Check_in_desk
 
 end
 
-democratic_republic_of_fane_airport = Airport.new("Democratic Republic of Fane Airport")
+democratic_republic_of_fane_airport = Airport.new("the Democratic Republic of Fane Airport")
 
 check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
 
 check_in_desk.add_flight_to_airport
 
-check_in_desk.add_passenger_to_flight
+# check_in_desk.add_passenger_to_flight
+
+# flight = Flight.new(200,"rome",334,1)
+
+# flight.add_passenger("fane", "fonseka", 26, "3344kkjj")
+
+# passenger_fane = Passenger.new("fane", "fonseka", 26, "3344kkjj")
+
+# check_in_desk.get_passenger_from_flight(flight);
+
+# check_in_desk.change_details(flight)
+
+# check_in_desk.change_flight_details(flight);
+
+# check_in_desk.delete_flight
+
+# puts check_in_desk.airport.flights
+
+check_in_desk.select_flight
 
 

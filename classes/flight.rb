@@ -19,9 +19,9 @@ class Flight
 
 	end
 
-	def add_passenger(name, age, passport_number)
+	def add_passenger(first_name, last_name, age, passport_number)
 
-		passenger = Passenger.new(name, age, passport_number)
+		passenger = Passenger.new(first_name, last_name, age, passport_number)
 		@passengers.push(passenger)
 
 	end

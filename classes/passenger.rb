@@ -1,16 +1,17 @@
 class Passenger
 
-	attr_reader :name, :age, :passport_number
+	attr_accessor :first_name, :last_name, :age, :passport_number
 
-	def initialize(name, age, passport_number)
+	def initialize(first_name, last_name, age, passport_number)
 
-		@name = name
+		@first_name = first_name
+		@last_name = last_name
 		@age = age
 		@passport_number = passport_number
 
 	end
 
 	def to_s
-		"name: #{@name}, age: #{@age}, passport number: #{@passport_number}"
+		"name: #{@first_name}, age: #{@age}, passport number: #{@passport_number}"
 	end	
 end
