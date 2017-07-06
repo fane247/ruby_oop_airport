@@ -9,6 +9,7 @@ class Check_in_desk
 	def initialize(airport)
 
 		@airport = airport
+		main_menu
 
 	end
 
@@ -52,9 +53,7 @@ class Check_in_desk
 
 
 
-	def add_passenger_to_flight
-
-		flight = select_flight
+	def add_passenger_to_flight(flight)
 
 		puts "Please enter the first name of the passenger \r\n"
 		passenger_first_name = gets.chomp
@@ -138,11 +137,7 @@ class Check_in_desk
 
 	end
 
-	def delete_flight()
-
-		puts "Please enter the flight number that you'd like to delete"
-
-		flight  = select_flight
+	def delete_flight(flight)
 
 		if !flight = nil
 
@@ -160,15 +155,65 @@ class Check_in_desk
 
 	def main_menu
 
-		exit = true
+		exit = false
 
 		while (!exit)
 
 			puts "Welcome to the Democratic Republic of Fane Airport"
+			puts "Main Menu \n"
 			puts "Please select one of the following options\n"
 
+			puts "1. Add flight"
+			puts "2. List all Flights"
+			puts "3. select a flight"
+			puts "4. exit"
 
+			answer = gets.chomp.to_i
 
+			case answer
+			when 1 then add_flight_to_airport
+			when 2 then put @airport.flights
+			when 3 then flights_menu
+			when 4 then exit = true
+			else puts "that is not a valid option"
+			end
+
+		end
+
+	end
+
+	def flights_menu
+
+		back = false
+
+		while (!back)
+
+			puts "flights menu \n"
+
+			puts "Please select one of the following options\n"
+
+			puts "1. add a passenger to a flight"
+			puts "2. list all passengers on a flight"
+			puts "3. change details of a flight"
+			puts "4. delete a flight"
+			puts "5. back"
+
+			answer = gets.chomp
+
+			flight = select_flight
+
+			case answer
+			when 1 then add_passenger_to_flight(flight)
+			when 2 then puts flight.passengers
+			when 3 then change_details(flight)
+			when 4 then delete_flight(flight)
+			when 5 then back = true
+			else puts "that is not a valid option"
+			end
+
+		end
+
+	end
 
 
 
@@ -176,9 +221,9 @@ end
 
 democratic_republic_of_fane_airport = Airport.new("the Democratic Republic of Fane Airport")
 
-check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
+# check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
 
-check_in_desk.add_flight_to_airport
+# check_in_desk.add_flight_to_airport
 
 # check_in_desk.add_passenger_to_flight
 
@@ -198,6 +243,6 @@ check_in_desk.add_flight_to_airport
 
 # puts check_in_desk.airport.flights
 
-check_in_desk.select_flight
+# check_in_desk.select_flight
 
 
