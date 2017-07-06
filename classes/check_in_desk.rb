@@ -247,6 +247,6 @@ check_in_desk = Check_in_desk.new(democratic_republic_of_fane_airport)
 
 # check_in_desk.select_flight
 
-check_in_desk.main_menu
+# check_in_desk.main_menu
 
 
